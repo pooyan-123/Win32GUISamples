@@ -1,1 +1,1 @@
-"# Win32GUISamples" 
+# Win32GUISamples
