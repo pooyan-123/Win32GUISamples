@@ -5,25 +5,21 @@ LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
+	WNDCLASS wc = { 0 };
 	HWND hWnd;
-	WNDCLASS wndclass;
 	BOOL bRet;
 	MSG msg;
 
-	wndclass.lpszClassName = TEXT("MyClass");
-	wndclass.lpfnWndProc = WndProc;
-	wndclass.style = 0;
-	wndclass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wndclass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wndclass.cbClsExtra = 0;
-	wndclass.cbWndExtra = 0;
-	wndclass.lpszMenuName = NULL;
-	wndclass.hInstance = hInstance;
-	if (!RegisterClass(&wndclass))
+	wc.lpszClassName = TEXT("MyClass");
+	wc.lpfnWndProc = WndProc;
+	wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+	wc.hInstance = hInstance;
+	if (!RegisterClass(&wc))
 		return 0;
 
-	hWnd = CreateWindow(TEXT("MyClass"), TEXT("SimpleWindow"), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, hInstance, NULL);
+	hWnd = CreateWindow(TEXT("MyClass"), TEXT("ConfirmBeforeClose"), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, hInstance, NULL);
 	if (!hWnd)
 		return 0;
 
@@ -44,13 +40,13 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	int msgboxID;
+	int iRes;
 
 	switch (message)
 	{
 	case WM_CLOSE:
-		msgboxID = MessageBox(hWnd, TEXT("Do you really want to close the window?"), TEXT("Close"), MB_YESNO | MB_ICONEXCLAMATION);
-		if (msgboxID == IDYES)
+		iRes = MessageBox(hWnd, TEXT("Do you really want to close the window?"), TEXT("Close"), MB_YESNO | MB_ICONEXCLAMATION);
+		if (iRes == IDYES)
 			DestroyWindow(hWnd);
 		return 0;
 
