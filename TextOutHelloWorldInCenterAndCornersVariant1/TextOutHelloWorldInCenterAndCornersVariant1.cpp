@@ -54,6 +54,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_SIZE:
 		cxClient = LOWORD(lParam);
 		cyClient = HIWORD(lParam);
+		return 0;
 
 	case WM_PAINT:
 		hDC = BeginPaint(hWnd, &ps);
