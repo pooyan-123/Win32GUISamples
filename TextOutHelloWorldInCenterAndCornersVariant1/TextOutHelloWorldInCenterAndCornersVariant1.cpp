@@ -46,7 +46,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	HDC hDC;
 	PAINTSTRUCT ps;
-	RECT rcClient;
 	static UINT cxClient, cyClient;
 
 	switch (message)
