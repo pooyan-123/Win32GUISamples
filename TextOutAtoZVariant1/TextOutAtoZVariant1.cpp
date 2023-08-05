@@ -46,9 +46,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	TEXTMETRIC tm;
 	static LONG cyChar;
 	PAINTSTRUCT ps;
-	const size_t iLastLine = (sizeof(szAtoZ) / sizeof(TCHAR)) - 2;
 	size_t iFirstLineToPaint;
 	size_t iLastLineToPaint;
+	const size_t iLastLine = (sizeof(szAtoZ) / sizeof(TCHAR)) - 2;
+
 	switch (message)
 	{
 	case WM_CREATE:
